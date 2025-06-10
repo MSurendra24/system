@@ -1,0 +1,165 @@
+/* system.css - Basic LinkedIn Clone Styles */
+
+/* Reset some defaults */
+body, h1, h2, h3, p, ul, li, a, input, button {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Arial, sans-serif;
+}
+
+body {
+    background: #f3f2ef;
+    color: #1d2226;
+}
+
+/* Header */
+.header {
+    background: #fff;
+    border-bottom: 1px solid #e6e9ec;
+    padding: 12px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.header .logo {
+    font-weight: bold;
+    color: #0a66c2;
+    font-size: 1.5rem;
+    letter-spacing: 1px;
+}
+
+.header nav a {
+    color: #666;
+    text-decoration: none;
+    margin: 0 12px;
+    font-size: 1rem;
+    transition: color 0.2s;
+}
+
+.header nav a:hover {
+    color: #0a66c2;
+}
+
+/* Main Layout */
+.container {
+    display: flex;
+    max-width: 1200px;
+    margin: 32px auto;
+    gap: 24px;
+}
+
+/* Sidebar */
+.sidebar {
+    flex: 1 1 220px;
+    background: #fff;
+    border-radius: 8px;
+    padding: 16px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+    min-width: 200px;
+}
+
+/* Feed */
+.feed {
+    flex: 2 1 600px;
+    background: #fff;
+    border-radius: 8px;
+    padding: 16px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+}
+
+/* Post Box */
+.post-box {
+    border: 1px solid #e6e9ec;
+    border-radius: 8px;
+    padding: 12px;
+    margin-bottom: 16px;
+    background: #f9fafb;
+}
+
+.post-box textarea {
+    width: 100%;
+    border: none;
+    resize: none;
+    font-size: 1rem;
+    padding: 8px;
+    border-radius: 4px;
+    background: #fff;
+    margin-bottom: 8px;
+}
+
+.post-box button {
+    background: #0a66c2;
+    color: #fff;
+    border: none;
+    padding: 8px 20px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background 0.2s;
+}
+
+.post-box button:hover {
+    background: #004182;
+}
+
+/* Post */
+.post {
+    border-bottom: 1px solid #e6e9ec;
+    padding: 16px 0;
+}
+
+.post:last-child {
+    border-bottom: none;
+}
+
+.post .author {
+    font-weight: bold;
+    color: #0a66c2;
+}
+
+.post .content {
+    margin: 8px 0;
+    font-size: 1rem;
+}
+
+.post .actions {
+    display: flex;
+    gap: 16px;
+    margin-top: 8px;
+}
+
+.post .actions button {
+    background: none;
+    border: none;
+    color: #666;
+    cursor: pointer;
+    font-size: 0.95rem;
+    transition: color 0.2s;
+}
+
+.post .actions button:hover {
+    color: #0a66c2;
+}
+
+/* Right Sidebar (Suggestions) */
+.suggestions {
+    flex: 1 1 220px;
+    background: #fff;
+    border-radius: 8px;
+    padding: 16px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+    min-width: 200px;
+}
+
+@media (max-width: 900px) {
+    .container {
+        flex-direction: column;
+        gap: 0;
+    }
+    .sidebar, .suggestions {
+        min-width: 0;
+        margin-bottom: 24px;
+    }
+}
