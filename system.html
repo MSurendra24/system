@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>WhatsApp Clone</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body { margin:0; font-family: Arial, sans-serif; background:#ece5dd; }
+        .container { display: flex; height: 100vh; }
+        .sidebar {
+            width: 320px; background: #075e54; color: #fff; display: flex; flex-direction: column;
+        }
+        .sidebar-header {
+            padding: 16px; background: #075e54; font-weight: bold; font-size: 1.2em;
+            border-bottom: 1px solid #0b786a;
+        }
+        .chat-list { flex: 1; overflow-y: auto; }
+        .chat-item {
+            display: flex; align-items: center; padding: 12px 16px; cursor: pointer;
+            border-bottom: 1px solid #0b786a;
+            transition: background 0.2s;
+        }
+        .chat-item:hover { background: #128c7e; }
+        .avatar {
+            width: 40px; height: 40px; border-radius: 50%; background: #25d366;
+            display: flex; align-items: center; justify-content: center; font-weight: bold; margin-right: 12px;
+        }
+        .chat-info { flex: 1; }
+        .chat-name { font-weight: bold; }
+        .chat-last { font-size: 0.9em; color: #cfd8dc; }
+        .main {
+            flex: 1; display: flex; flex-direction: column; background: #ece5dd;
+        }
+        .main-header {
+            background: #075e54; color: #fff; padding: 16px; font-weight: bold;
+            border-bottom: 1px solid #0b786a;
+        }
+        .messages {
+            flex: 1; padding: 24px; overflow-y: auto; display: flex; flex-direction: column;
+        }
+        .message {
+            max-width: 60%; margin-bottom: 12px; padding: 10px 16px; border-radius: 8px;
+            background: #fff; align-self: flex-start; box-shadow: 0 1px 2px rgba(0,0,0,0.04);
+        }
+        .message.me {
+            background: #dcf8c6; align-self: flex-end;
+        }
+        .input-area {
+            display: flex; padding: 16px; background: #f7f7f7; border-top: 1px solid #ddd;
+        }
+        .input-area input {
+            flex: 1; padding: 10px; border: 1px solid #ccc; border-radius: 20px; outline: none;
+            font-size: 1em;
+        }
+        .input-area button {
+            background: #25d366; color: #fff; border: none; border-radius: 50%; width: 40px; height: 40px;
+            margin-left: 8px; font-size: 1.2em; cursor: pointer;
+            display: flex; align-items: center; justify-content: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="sidebar">
+            <div class="sidebar-header">Chats</div>
+            <div class="chat-list" id="chatList">
+                <div class="chat-item" onclick="selectChat(0)">
+                    <div class="avatar">A</div>
+                    <div class="chat-info">
+                        <div class="chat-name">Alice</div>
+                        <div class="chat-last">Hey! How are you?</div>
+                    </div>
+                </div>
+                <div class="chat-item" onclick="selectChat(1)">
+                    <div class="avatar">B</div>
+                    <div class="chat-info">
+                        <div class="chat-name">Bob</div>
+                        <div class="chat-last">Let's meet tomorrow.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="main">
+            <div class="main-header" id="chatHeader">Alice</div>
+            <div class="messages" id="messages">
+                <!-- Messages will appear here -->
+            </div>
+            <form class="input-area" id="messageForm" autocomplete="off">
+                <input type="text" id="messageInput" placeholder="Type a message" required />
+                <button type="submit">&#9658;</button>
+            </form>
+        </div>
+    </div>
+    <script>
+        const chats = [
+            {
+                name: "Alice",
+                messages: [
+                    { text: "Hey! How are you?", fromMe: false },
+                    { text: "I'm good, thanks! You?", fromMe: true }
+                ]
+            },
+            {
+                name: "Bob",
+                messages: [
+                    { text: "Let's meet tomorrow.", fromMe: false }
+                ]
+            }
+        ];
+        let currentChat = 0;
+
+        function renderMessages() {
+            const messagesDiv = document.getElementById('messages');
+            messagesDiv.innerHTML = '';
+            chats[currentChat].messages.forEach(msg => {
+                const div = document.createElement('div');
+                div.className = 'message' + (msg.fromMe ? ' me' : '');
+                div.textContent = msg.text;
+                messagesDiv.appendChild(div);
+            });
+            messagesDiv.scrollTop = messagesDiv.scrollHeight;
+        }
+
+        function selectChat(index) {
+            currentChat = index;
+            document.getElementById('chatHeader').textContent = chats[index].name;
+            renderMessages();
+        }
+
+        document.getElementById('messageForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const input = document.getElementById('messageInput');
+            const text = input.value.trim();
+            if (text) {
+                chats[currentChat].messages.push({ text, fromMe: true });
+                input.value = '';
+                renderMessages();
+            }
+        });
+
+        // Initial render
+        renderMessages();
+    </script>
+</body>
+</html>
